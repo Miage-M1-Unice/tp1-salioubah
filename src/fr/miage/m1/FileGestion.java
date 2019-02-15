@@ -49,6 +49,25 @@ public class FileGestion {
 		System.out.println("----------------------FIN---------------------");
 	}
 	
+	public void filesListFilter(String repertoire, Filtre filtre) {
+		File rep = new File(repertoire);
+		File[] fichiers = rep.listFiles();
+		System.out.println("----------------------DEBUT------------------");
+		int i = 1;
+		for (File fichier : fichiers) {
+			System.out.println("Fichier "+i+": "+fichier);
+			if(fichier.isDirectory()) {
+				int j = 1;
+				for (String f : fichier.list()) {
+					System.out.println("\tFichier "+i+"-"+j+": "+f);
+					j++;
+				}
+			}
+			i++;
+		}
+		System.out.println("----------------------FIN---------------------");
+	}
+	
 	public static void main(String[] args) {
 		FileGestion f = new FileGestion();
 		f.filesOnlyList("C:\\Users\\BAH\\Desktop\\MIAGE");
