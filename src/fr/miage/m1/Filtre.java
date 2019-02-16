@@ -11,26 +11,27 @@ import java.io.FilenameFilter;
  *
  */
 public class Filtre implements FilenameFilter {
+	
+	private String filtre;
 
 	/**
 	 * 
 	 */
-	public Filtre(){
-		
+	public Filtre(String filtre){
+		this.filtre = filtre;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.io.FilenameFilter#accept(java.io.File, java.lang.String)
-	 */
 	@Override
 	public boolean accept(File dir, String name) {
-		// TODO Auto-generated method stub
+		if(name.lastIndexOf('.')>0) {
+			int lastIndex = name.lastIndexOf('.');
+			String str = name.substring(lastIndex);
+
+			if(str.equals(filtre)) {
+				return true;
+			}
+		}
+
 		return false;
 	}
-	
-	public void filesListFilter(String chemin) {
-		File f = new File(chemin);
-		//f.listFiles(Filtre);
-	}
-
 }
