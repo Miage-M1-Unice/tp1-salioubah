@@ -216,11 +216,10 @@ public class FileGestion {
 		
 		f.filesListFilterAnonymous(dir, ".pdf");
 		
-		FileGestionVisitor fileVisitor = new FileGestionVisitor();
+		FileGestionVisitor fileVisitor = new FileGestionVisitor(".pdf");
 		try {
 			Files.walkFileTree(Paths.get(dir2), fileVisitor);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
