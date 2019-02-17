@@ -5,6 +5,9 @@ package fr.miage.m1;
 
 import java.io.File;
 import java.io.FilenameFilter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 /**
  * @author BAH
@@ -199,15 +202,26 @@ public class FileGestion {
 
 	public static void main(String[] args) {
 		FileGestion f = new FileGestion();
-		f.filesOnlyList("C:\\Users\\BAH\\Desktop");
-		f.filesList("C:\\Users\\BAH\\Desktop");
+		String dir = "C:\\Users\\BAH\\Desktop";
+		String dir2 = "C:\\Users\\BAH\\Desktop\\MIAGE\\M1\\Intelligence Economique";
+		
+		f.filesOnlyList(dir);
+		f.filesList(dir);
 
 		Filtre filtre = new Filtre(".docx");
-		f.filesListFilter("C:\\Users\\BAH\\Desktop", filtre);
+		f.filesListFilter(dir, filtre);
 
 		FiltreInterne fI = f.new FiltreInterne(".zip");
-		f.filesListFilterInterne("C:\\Users\\BAH\\Desktop", fI);
+		f.filesListFilterInterne(dir, fI);
 		
-		f.filesListFilterAnonymous("C:\\Users\\BAH\\Desktop", ".pdf");
+		f.filesListFilterAnonymous(dir, ".pdf");
+		
+		FileGestionVisitor fileVisitor = new FileGestionVisitor();
+		try {
+			Files.walkFileTree(Paths.get(dir2), fileVisitor);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
