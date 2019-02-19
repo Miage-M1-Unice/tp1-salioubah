@@ -1,7 +1,7 @@
 /**
  * 
  */
-package fr.miage.m1;
+package fr.miage.m1.tp1;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -205,10 +205,10 @@ public class FileGestion {
 		String dir = "C:\\Users\\BAH\\Desktop";
 		String dir2 = "C:\\Users\\BAH\\Desktop\\MIAGE\\M1\\Intelligence Economique";
 		
-		f.filesOnlyList(dir);
-		f.filesList(dir);
+		//f.filesOnlyList(dir);
+		//f.filesList(dir);
 
-		Filtre filtre = new Filtre(".docx");
+		Filtre filtre = new Filtre(".*docx");
 		f.filesListFilter(dir, filtre);
 
 		FiltreInterne fI = f.new FiltreInterne(".zip");

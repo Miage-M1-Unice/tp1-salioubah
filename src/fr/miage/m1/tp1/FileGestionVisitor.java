@@ -1,7 +1,7 @@
 /**
  * 
  */
-package fr.miage.m1;
+package fr.miage.m1.tp1;
 
 import java.io.IOException;
 import java.nio.file.FileVisitResult;
