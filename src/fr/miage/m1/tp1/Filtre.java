@@ -15,6 +15,8 @@ import java.util.regex.Pattern;
 public class Filtre implements FilenameFilter {
 	
 	private String filtre;
+	
+	private Pattern pattern;
 
 	/**
 	 * 
@@ -23,22 +25,15 @@ public class Filtre implements FilenameFilter {
 		this.filtre = filtre;
 	}
 	
+	public Filtre(Pattern p) {
+		pattern = p;
+	}
+	
 	@Override
 	public boolean accept(File dir, String name) {
-		if(name.lastIndexOf('.')>0) {
-			int lastIndex = name.lastIndexOf('.');
-			String str = name.substring(lastIndex);
-
-			if(str.equals(filtre)) {
-				return true;
-			}
-			
-			Pattern p = Pattern.compile(filtre);
-			Matcher m = p.matcher(name);
-			if(m.find())
-				return true;
-		}
-
-		return false;
+		
+		File f = new File(dir, name);
+		return f.isDirectory() || Pattern.matches(pattern.pattern(), f.getPath());
+	
 	}
 }

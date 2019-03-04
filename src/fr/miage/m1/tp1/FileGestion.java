@@ -8,6 +8,7 @@ import java.io.FilenameFilter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.regex.Pattern;
 
 /**
  * @author BAH
@@ -107,6 +108,7 @@ public class FileGestion {
 			int i = 1;
 			for (File fichier : fichiers) {
 				System.out.println("Fichier "+i+": "+fichier);
+				/*
 				if(fichier.isDirectory()) {
 					int j = 1;
 					for (String f : fichier.list()) {
@@ -114,6 +116,7 @@ public class FileGestion {
 						j++;
 					}
 				}
+				*/
 				i++;
 			}
 			System.out.println("----------------------FIN---------------------");
@@ -207,14 +210,16 @@ public class FileGestion {
 		
 		//f.filesOnlyList(dir);
 		//f.filesList(dir);
+		
+		Pattern p = Pattern.compile(".*docx");
 
-		Filtre filtre = new Filtre(".*docx");
+		Filtre filtre = new Filtre(p);
 		f.filesListFilter(dir, filtre);
 
 		FiltreInterne fI = f.new FiltreInterne(".zip");
-		f.filesListFilterInterne(dir, fI);
+		//f.filesListFilterInterne(dir, fI);
 		
-		f.filesListFilterAnonymous(dir, ".pdf");
+		//f.filesListFilterAnonymous(dir, ".pdf");
 		
 		FileGestionVisitor fileVisitor = new FileGestionVisitor(".pdf");
 		try {
