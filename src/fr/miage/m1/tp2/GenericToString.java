@@ -5,6 +5,7 @@ package fr.miage.m1.tp2;
 
 import java.awt.Point;
 import java.awt.Polygon;
+import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 
 /**
@@ -55,18 +56,31 @@ public class GenericToString {
 	public String toString(Object ob, int prof) throws IllegalArgumentException, IllegalAccessException, InstantiationException {
 
 		String affichage = "";
-		if(prof == 0) {
-			return affichage;
-		}
 		Class cl = ob.getClass();
 		Field attributs[] = cl.getDeclaredFields();
 
 		affichage = cl.getName()+"[";
 		for (Field field : attributs) {
+			if(prof == 0) {
+				return "";
+			}
 			field.setAccessible(true);
 			if(field.getType().isPrimitive()) {
 				affichage += field.getName()+"="+field.get(ob)+";";
 			}
+			else if(field.getType().isArray()){
+
+                affichage += field.getName();
+                affichage += "={";
+
+                for (int j = 0; j < Array.getLength(field.get(ob)); j++) {
+                    affichage += Array.get(field.get(ob), j);
+
+                    if(j != Array.getLength(field.get(ob))-1)
+                        affichage += ",";
+                }
+                affichage += "} ";
+            }
 			else {
 				//	for (int i = 1; i < prof; i++) {
 				affichage += toString(field.get(ob),prof-1);
